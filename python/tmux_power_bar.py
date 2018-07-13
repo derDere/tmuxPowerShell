@@ -1,8 +1,25 @@
 import time as t
+import os
 #from terminal import terminal as term
-#from power import battery
+from power import battery
 
-#def main(args):
+def main():
+  batt = battery()
+  while True:
+    batt.reload()
+    pval = int(round(batt.get_val()))
+    charging = ''
+    if batt.is_charging():
+      charging = '+'
+    os.system("tmux set -g status-right '" + charging + str(pval) + "%  %d/%m  %H:%M:%S'")
+    if pval <= 40:
+      if pval > 20:
+        os.system("tmux set -g status-bg colour3")
+      else:
+        os.system("tmux set -g status-bg colour1")
+    else:
+      os.system("tmux set -g status-bg colour2")
+    t.sleep(1)
 #    GROUND = 128
 #    try:
 #        batt = battery()
@@ -43,9 +60,7 @@ import time as t
 #        term.out("\n\n\nBye Bye")
 
 if __name__ == "__main__":
-  while True:
-    print("Test")
-    t.sleep(5)
+  main()
 
 
 

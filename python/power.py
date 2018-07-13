@@ -1,7 +1,7 @@
 import sys
 import re
 import time as t
-from terminal import terminal as term
+#from terminal import terminal as term
 
 class battery:
     def __init__(self):
@@ -45,28 +45,28 @@ class battery:
         else:
             return False
 
-def main(args):
-    if len(args) > 0 and args[0] == "display":
-        try:
-            base = 100
-            if len(args) > 1 and re.search("^\d+$", args[1]):
-                base = int(args[1])
-            batt = battery()
-            while True:
-                batt.reload()
-                term.clear()
-                term.out(batt.get_bar(base))
-                state_color = "[R]"
-                if batt.is_charging() or batt.is_full():
-                    state_color = "[G]"
-                term.out(state_color + batt.status + " [C]" + str(round(batt.get_val(),2)) + "%   [A]" + t.ctime())
-                t.sleep(1)
-        except KeyboardInterrupt:
-            term.out("...exited")
-            
-
+#def main(args):
+#    if len(args) > 0 and args[0] == "display":
+#        try:
+#            base = 100
+#            if len(args) > 1 and re.search("^\d+$", args[1]):
+#                base = int(args[1])
+#            batt = battery()
+#            while True:
+#                batt.reload()
+#                term.clear()
+#                term.out(batt.get_bar(base))
+#                state_color = "[R]"
+#                if batt.is_charging() or batt.is_full():
+#                    state_color = "[G]"
+#                term.out(state_color + batt.status + " [C]" + str(round(batt.get_val(),2)) + "%   [A]" + t.ctime())
+#                t.sleep(1)
+#        except KeyboardInterrupt:
+#            term.out("...exited")
+#            
+#
 ########################################################################################
-if __name__ == "__main__":
-    main(sys.argv[1:])
+#if __name__ == "__main__":
+#    main(sys.argv[1:])
 
 
